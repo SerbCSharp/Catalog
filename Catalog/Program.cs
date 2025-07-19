@@ -1,13 +1,14 @@
 using Catalog.Application.Interfaces;
 using Catalog.Infrastructure.EventBus.RabbitMQ;
+using Catalog.Infrastructure.Hubs;
 using RabbitMQ.Client;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSignalR();
 
 // RabbitMq
 builder.Services.Configure<RabbitMqConfiguration>(builder.Configuration.GetSection(RabbitMqConfiguration.Section));
@@ -38,4 +39,5 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+app.MapHub<NotificationHub>("/notification");
 app.Run();
