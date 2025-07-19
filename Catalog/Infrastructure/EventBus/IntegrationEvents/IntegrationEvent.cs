@@ -10,5 +10,6 @@
 
         public Guid Id { get; private set; }
         public DateTime CreationDate { get; private set; }
+        TimeSpan TimeToLive { get; set; }
     }
 }

@@ -23,6 +23,7 @@ namespace Catalog.Infrastructure.EventBus.RabbitMQ
                     _logger.LogDebug("Closing the connection");
                     _connection?.Close();
                     _connection?.Dispose();
+                    Console.WriteLine("Connection dispose");
                 }
             }
             catch (Exception ex)

@@ -35,6 +35,7 @@ namespace Catalog.Infrastructure.EventBus.RabbitMQ
                     _logger.LogDebug($"Closing RabbitMQ channel {_model.ChannelNumber}");
                     _model?.Close();
                     _model?.Dispose();
+                    Console.WriteLine("Channel dispose");
                 }
             }
             catch (Exception ex)
