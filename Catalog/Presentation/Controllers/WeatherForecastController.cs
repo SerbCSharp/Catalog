@@ -5,7 +5,7 @@ namespace Catalog.Presentation.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    //[Authorize("OnlyIT")]
+    [Authorize("OnlyIT")]
 
     public class WeatherForecastController : ControllerBase
     {
