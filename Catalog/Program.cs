@@ -37,13 +37,11 @@ builder.Services.AddHostedService<Receive>();
 // JwtBearer
 builder.Services.AddDbContext<UserDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("UserDB")));
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<UserDbContext>();
-
 builder.Services.Configure<JWTConfiguration>(builder.Configuration.GetSection("JWTSettings"));
 var secretKey = builder.Configuration.GetSection("JWTSettings:SecretKey").Value;
 var issuer = builder.Configuration.GetSection("JWTSettings:Issuer").Value;
 var audience = builder.Configuration.GetSection("JWTSettings:Audience").Value;
 var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
-
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -63,12 +61,10 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true
     };
 });
-
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("OnlyIt", policyBuilger => policyBuilger.RequireClaim("Profession", "Programmer"));
 });
-
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
